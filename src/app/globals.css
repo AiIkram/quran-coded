@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+@import "tailwindcss";
+
+
+:root {
+  --ivory: #FAF9F5;
+  --paper: #FFFDF7;
+  --ink: #16221E;
+  --muted: #6C7A73;
+  --line: #E6E2D8;
+  --green: #0E5A45;
+  --green-deep: #0A3A2C;
+  --teal: #0F766E;
+  --gold: #A87B2A;
+  --gold-soft: #C79A3F;
+  --gold-wash: #FBF5E6;
+  --error: #B4491F;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Tajawal', system-ui, sans-serif;
+  background:
+    radial-gradient(1000px 520px at 90% -8%, rgba(199, 154, 63, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 6% 4%, rgba(14, 90, 69, 0.07), transparent 58%),
+    var(--ivory);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.font-display { font-family: 'Amiri', 'Aref Ruqaa', serif; font-weight: 700; }
+.font-quran { font-family: 'Amiri Quran', serif; line-height: 2.6; word-spacing: 0.06em; }
+
+.star-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='90' height='90' viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23A87B2A' stroke-opacity='0.10'%3E%3Cpath d='M45 8l9 28 28 9-28 9-9 28-9-28-28-9 28-9z'/%3E%3C/g%3E%3Cg fill='none' stroke='%230E5A45' stroke-opacity='0.06'%3E%3Ccircle cx='45' cy='45' r='30'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.glass {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(22, 34, 30, 0.04), 0 14px 34px rgba(22, 34, 30, 0.06);
+}
+
+.gold-text {
+  background: linear-gradient(120deg, #C08F35, #A87B2A 60%, #8C6522);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+.btn-gold {
+  background: linear-gradient(120deg, #12705a, #0E5A45);
+  color: #FFFDF7;
+  font-weight: 700;
+  border: 1px solid rgba(10, 58, 44, 0.4);
+  box-shadow: 0 6px 18px rgba(14, 90, 69, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(120deg, #0E5A45, #0A3A2C);
+  box-shadow: 0 10px 24px rgba(14, 90, 69, 0.32);
+}
+.btn-gold:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 700;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.btn-ghost:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: #F6FBF9;
+}
+
+.chip {
+  border: 1px solid #E9E1CB;
+  background: var(--gold-wash);
+}
+
+.play-glow {
+  background: linear-gradient(140deg, #12705a, #0A3A2C);
+  color: #FFFDF7;
+  animation: glow-pulse 2.2s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 5px rgba(14, 90, 69, 0.14), 0 0 22px rgba(14, 90, 69, 0.22); }
+  50% { box-shadow: 0 0 0 9px rgba(14, 90, 69, 0.2), 0 0 32px rgba(14, 90, 69, 0.3); }
+}
+
+input[type="range"].seek {
+  -webkit-appearance: none; appearance: none;
+  height: 5px; border-radius: 999px;
+  background: #E9E5D9; outline: none;
+}
+input[type="range"].seek::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px; border-radius: 999px;
+  background: var(--green); cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(14, 90, 69, 0.18);
+}
+input[type="range"].seek::-moz-range-thumb {
+  width: 16px; height: 16px; border: none; border-radius: 999px;
+  background: var(--green); cursor: pointer;
+}
+
+audio.native-dark {
+  width: 100%; height: 38px;
+  border-radius: 10px;
+  background: #F3F1E7;
+  border: 1px solid var(--line);
+}
+
+select, input[type="number"] { color-scheme: light; }
+select, input[type="number"] {
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #F1EFE6; }
+::-webkit-scrollbar-thumb { background: #CFCABB; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-soft); }
+
+.orn-divider {
+  display: flex; align-items: center; gap: 12px; color: var(--gold);
+}
+.orn-divider::before, .orn-divider::after {
+  content: ""; height: 1px; flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(168, 123, 42, 0.5), transparent);
+}
+
+.eq-bar { display: inline-flex; align-items: flex-end; gap: 2px; height: 15px; }
+.eq-bar span { width: 3px; border-radius: 2px; background: var(--green); animation: eq 0.9s ease-in-out infinite; }
+.eq-bar span:nth-child(2) { animation-delay: 0.15s; }
+.eq-bar span:nth-child(3) { animation-delay: 0.3s; }
+.eq-bar span:nth-child(4) { animation-delay: 0.45s; }
+@keyframes eq { 0%, 100% { height: 5px; } 50% { height: 14px; } }
+
+
+
+.mushaf-shell {
+  position: relative;
+  border-radius: 22px;
+  padding: clamp(10px, 1.6vw, 18px);
+  background: linear-gradient(160deg, #F2EFE4, #EBE7D9);
+  border: 1px solid #DCD6C4;
+  box-shadow:
+    0 2px 4px rgba(22, 34, 30, 0.05),
+    0 30px 60px rgba(22, 34, 30, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.mushaf-page {
+  position: relative;
+  border-radius: 14px;
+  padding: clamp(24px, 4vw, 58px);
+  color: var(--ink);
+  background:
+    radial-gradient(700px 320px at 50% -10%, rgba(255, 255, 255, 0.95), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(168, 123, 42, 0.025) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, #FFFDF7, #FDFBF3);
+  border: 2px solid var(--gold-soft);
+  box-shadow: inset 0 0 0 1px #FFF, inset 0 0 40px rgba(168, 123, 42, 0.10);
+  overflow: hidden;
+}
+.mushaf-page::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(14, 90, 69, 0.35);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.surah-band {
+  position: relative;
+  text-align: center;
+  border-top: 1.5px solid var(--gold-soft);
+  border-bottom: 1.5px solid var(--gold-soft);
+  padding: 16px 46px;
+  background: linear-gradient(90deg, rgba(168, 123, 42, 0.08), rgba(14, 90, 69, 0.06), rgba(168, 123, 42, 0.08));
+}
+.surah-band::before, .surah-band::after {
+  content: "۞";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 20px;
+}
+.surah-band::before { right: 16px; }
+.surah-band::after { left: 16px; }
+.surah-band h2 {
+  font-family: 'Amiri', serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--green);
+  line-height: 1.5;
+}
+.surah-band .band-meta {
+  font-size: 11.5px;
+  color: #7A6E58;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.bismillah {
+  font-family: 'Amiri Quran', serif;
+  text-align: center;
+  font-size: clamp(22px, 2.6vw, 31px);
+  color: var(--green);
+  margin-top: 28px;
+  line-height: 2.2;
+}
+
+.mushaf-text {
+  font-family: 'Amiri Quran', serif;
+  font-size: clamp(24px, 2.1vw, 35px);
+  line-height: 2.9;
+  text-align: justify;
+  color: var(--ink);
+  margin-top: 24px;
+  word-spacing: 0.05em;
+}
+
+.ayah-span {
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 4px 6px;
+  margin: 0 -3px;
+  transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+.ayah-span:hover { background: rgba(168, 123, 42, 0.16); }
+.ayah-span.is-active {
+  background: rgba(14, 90, 69, 0.14);
+  box-shadow: 0 0 0 1.5px rgba(14, 90, 69, 0.45);
+}
+.ayah-span.is-playing {
+  background: rgba(199, 154, 63, 0.32);
+  box-shadow: 0 0 0 1.5px rgba(168, 123, 42, 0.6);
+}
+
+.ayah-veiled {
+  color: transparent !important;
+  text-shadow: 0 0 12px rgba(22, 34, 30, 0.7);
+}
+.ayah-mark { color: var(--gold); white-space: nowrap; }
+.ayah-mark.veiled-mark { opacity: 0.3; }
+
+.ayah-study { padding: 20px 0; border-bottom: 1px dashed #E0D9C6; }
+.ayah-study:last-child { border-bottom: none; }
+.ayah-study .study-line {
+  font-family: 'Amiri Quran', serif;
+  font-size: clamp(23px, 2vw, 31px);
+  line-height: 2.7;
+  color: var(--ink);
+}
+.meaning-box {
+  margin-top: 12px;
+  border-right: 3px solid var(--gold-soft);
+  background: #F7F5EC;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 15px;
+  line-height: 2;
+  color: #3E4B45;
+}
+.meaning-box .m-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--green);
+  background: #E7F1EC;
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 6px;
+}
+
+
+.mode-tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(22, 34, 30, 0.05);
+}
+.mode-tab {
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--muted);
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.mode-tab:hover { color: var(--green); background: #F2F8F5; }
+.mode-tab.is-on {
+  background: var(--green);
+  color: #FFFDF7;
+  box-shadow: 0 4px 12px rgba(14, 90, 69, 0.28);
+}
+.mode-tab.understand-on {
+  background: var(--gold-wash);
+  color: #8C6522;
+  border-color: #E9E1CB;
+  box-shadow: inset 0 0 0 1px rgba(168, 123, 42, 0.35);
+}
+
+.mushaf-foot {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #7A6E58;
+  font-weight: 700;
+}
+
+.plate {
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 60px rgba(22, 34, 30, 0.18);
+}
+
+
+.player-bar {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  box-shadow: 0 -6px 30px rgba(22, 34, 30, 0.10), 0 18px 50px rgba(22, 34, 30, 0.16);
+  backdrop-filter: blur(10px);
+}
+.opt-chip {
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  color: var(--muted);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 6px 13px;
+  font-size: 12.5px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.opt-chip:hover { border-color: var(--gold-soft); color: #8C6522; background: var(--gold-wash); }
+.opt-chip.on {
+  background: var(--green);
+  border-color: var(--green-deep);
+  color: #FFFDF7;
+  box-shadow: 0 4px 10px rgba(14, 90, 69, 0.25);
+}
+.opt-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #7A6E58;
+  margin-inline-end: 4px;
+}
