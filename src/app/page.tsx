@@ -59,9 +59,9 @@ export default function HomePage() {
             <div className="relative">
               <div className="plate relative overflow-hidden rounded-[32px]">
                 <img
-                  src="images/hero-mushaf.jpg"
+                  src="/images/hero-mushaf.jpg"
                   alt="مصحف مغربي مفتوح على رحل خشبي في ضوء المصباح"
-                  className="h-[300px] w-full object-cover sm:h-[380px] md:h-[460px]"
+                  className="h-[300px] w-full object-cover object-[78%_center] sm:h-[380px] md:h-[460px]"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#FAF9F5] via-[#FAF9F5]/15 to-transparent" />
                 <div className="absolute inset-x-4 bottom-4 flex flex-wrap items-center justify-between gap-2">

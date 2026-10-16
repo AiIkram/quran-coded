@@ -8,7 +8,7 @@ export default function AhkamPage() {
     <main className="mx-auto max-w-7xl px-4 py-10">
       <div className="glass relative overflow-hidden rounded-[28px] p-8 text-center md:p-12">
         <img
-          src="images/zellige-detail.jpg"
+          src="/images/zellige-detail.jpg"
           alt="تفصيل زخرفة مغربية مذهّبة من مخطوطة"
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
         />
