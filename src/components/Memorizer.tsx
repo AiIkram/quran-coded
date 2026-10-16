@@ -288,7 +288,10 @@ export default function Memorizer({
         body: JSON.stringify({ surahNumber: surahNum, ayahNumber: ayahNum, status: st, repetitions: times, mastery: st === "mastered" ? 5 : 3 }),
       });
       if (r.status === 401) throw new Error("سجّل الدخول أولاً حتى يُحفَظ تقدّمك الشخصي.");
-      if (!r.ok) throw new Error("تعذّر حفظ التقدّم. حاول مرة أخرى.");
+      if (!r.ok) {
+        const d = await r.json().catch(() => ({}));
+        throw new Error(`تعذّر حفظ التقدّم. حاول مرة أخرى.${d.hint ? ` (${d.hint})` : ""}`);
+      }
       const j = await r.json();
       const p = (j.progress ?? [])[0];
       setProgressMap((m) => ({
@@ -310,7 +313,10 @@ export default function Memorizer({
     try {
       const response = await authenticatedFetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(items) });
       if (response.status === 401) throw new Error("سجّل الدخول أولاً حتى يُحفَظ تقدّمك الشخصي.");
-      if (!response.ok) throw new Error("تعذّر حفظ التقدّم. حاول مرة أخرى.");
+      if (!response.ok) {
+        const d = await response.json().catch(() => ({}));
+        throw new Error(`تعذّر حفظ التقدّم. حاول مرة أخرى.${d.hint ? ` (${d.hint})` : ""}`);
+      }
       await loadProgress(surahNum);
     } catch (error) {
       setSaveError(error instanceof Error ? error.message : "تعذّر حفظ التقدّم.");

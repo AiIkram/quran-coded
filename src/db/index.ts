@@ -15,6 +15,10 @@ export const pool =
   globalForDb.__arenaNextJsPostgresqlPool ??
   new Pool({
     connectionString: databaseUrl,
+    // Supabase requires TLS; skip it only for a local Postgres.
+    ssl: /localhost|127\.0\.0\.1/.test(databaseUrl) ? undefined : { rejectUnauthorized: false },
+    connectionTimeoutMillis: 8000,
+    max: 5,
   });
 
 if (process.env.NODE_ENV !== "production") {

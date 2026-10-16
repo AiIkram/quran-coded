@@ -4,6 +4,22 @@ import { db } from "@/db";
 import { hifzProgress } from "@/db/schema";
 import { getAuthenticatedUser } from "@/lib/require-user";
 
+function dbHint(error: unknown) {
+  const code = (error as { code?: string })?.code ?? "unknown";
+  const hints: Record<string, string> = {
+    ENETUNREACH: "database-unreachable (use the Supabase pooler connection string, not db.<ref>.supabase.co)",
+    ENOTFOUND: "database-host-not-found (check DATABASE_URL)",
+    ECONNREFUSED: "database-refused-connection (check DATABASE_URL host/port)",
+    ETIMEDOUT: "database-timeout (use the Supabase pooler connection string)",
+    "28P01": "database-wrong-password (check DATABASE_URL password)",
+    "42703": "missing-column (run the supabase/migrations SQL file)",
+    "42P01": "missing-table (run npx drizzle-kit push)",
+    "42P10": "missing-unique-index (run the supabase/migrations SQL file)",
+    "23503": "user-not-in-auth.users (FK mismatch: DATABASE_URL points at a different Supabase project than the login)",
+  };
+  return { code, hint: hints[code] ?? "unexpected-db-error" };
+}
+
 export async function GET(req: Request) {
   const user = await getAuthenticatedUser(req);
   if (!user) return NextResponse.json({ error: "authentication-required" }, { status: 401 });
@@ -15,8 +31,9 @@ export async function GET(req: Request) {
       : eq(hifzProgress.userId, user.id);
     const rows = await db.select().from(hifzProgress).where(filters).limit(7000);
     return NextResponse.json({ progress: rows });
-  } catch {
-    return NextResponse.json({ progress: [], error: "db-unavailable" }, { status: 503 });
+  } catch (error) {
+    console.error("[progress GET]", error);
+    return NextResponse.json({ progress: [], error: "db-unavailable", ...dbHint(error) }, { status: 503 });
   }
 }
 
@@ -69,7 +86,7 @@ export async function POST(req: Request) {
         if (inserted) results.push(inserted);
       }
     }
-    if (results.length) {
+    if (results.length) try {
       const today = new Date().toISOString().slice(0, 10);
       const memorizedCount = results.filter((row) => row.status === "memorized" || row.status === "mastered").length;
       await db.execute(sql`
@@ -78,10 +95,14 @@ export async function POST(req: Request) {
         ON CONFLICT (user_id, day) DO UPDATE SET
           ayahs_memorized = daily_stats.ayahs_memorized + EXCLUDED.ayahs_memorized
       `);
+    } catch (error) {
+      // Progress is already saved; a stats failure must not make the save look failed.
+      console.error("[progress POST daily_stats]", error);
     }
     return NextResponse.json({ ok: true, updated: results.length, progress: results });
-  } catch {
-    return NextResponse.json({ ok: false, error: "db-error" }, { status: 500 });
+  } catch (error) {
+    console.error("[progress POST]", error);
+    return NextResponse.json({ ok: false, error: "db-error", ...dbHint(error) }, { status: 500 });
   }
 }
 
