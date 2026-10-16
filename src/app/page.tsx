@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SURAHS, TOTAL_AYAHS } from "@/data/surahs";
 import { RECITERS, AYAH_VOICES, ayahAudioUrl } from "@/lib/audio";
-import { WARSH_RULES, MEMORIZE_STEPS } from "@/data/warsh";
+import { MEMORIZE_STEPS } from "@/data/warsh";
 
 export const dynamic = "force-dynamic";
 
@@ -159,7 +159,6 @@ export default function HomePage() {
               ))}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/ahkam" className="btn-gold rounded-2xl px-6 py-3 text-sm">تعلّم الأحكام الثمانية</Link>
               <Link href="/hifz?surah=36" className="btn-ghost rounded-2xl px-6 py-3 text-sm font-bold">احفظ سورة يس</Link>
             </div>
           </div>
@@ -211,24 +210,6 @@ export default function HomePage() {
               </Link>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-4">
-        <div className="glass rounded-[28px] p-6 md:p-10">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <h2 className="font-display text-2xl font-bold md:text-3xl">أحكام ورش عن <span className="gold-text">الأزرق</span></h2>
-            <Link href="/ahkam" className="btn-gold rounded-full px-5 py-2 text-sm">كل الدروس</Link>
-          </div>
-          <div className="mt-6 grid gap-3 md:grid-cols-4">
-            {WARSH_RULES.slice(0, 4).map((rule) => (
-              <div key={rule.id} className="rounded-2xl border border-black/[0.08] bg-[#FFFFFF] p-5">
-                <div className="font-display text-lg font-bold text-[#0E5A45]">{rule.arabicTitle}</div>
-                <div className="mt-1 text-[13px] leading-6 text-[#6C7A73]">{rule.summary}</div>
-                <div className="font-quran mt-3 rounded-xl bg-[#1B2A25] p-3 text-center text-xl text-[#FFFFFF]">{rule.example}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

@@ -39,7 +39,6 @@ const links = [
   { href: "/", label: "الرئيسية" },
   { href: "/hifz", label: "مصحف الحفظ" },
   { href: "/reciters", label: "القُرّاء" },
-  { href: "/ahkam", label: "أحكام ورش" },
   { href: "/progress", label: "تقدّمي" },
   { href: "/account", label: "حسابي" },
 ];
@@ -137,7 +136,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <ul className="mt-4 space-y-2.5 text-sm text-[#AEBAB2]">
                 <li><Link href="/hifz" className="transition hover:text-[#E3C579]">مصحف الحفظ والتكرار</Link></li>
                 <li><Link href="/reciters" className="transition hover:text-[#E3C579]">قراء ورش</Link></li>
-                <li><Link href="/ahkam" className="transition hover:text-[#E3C579]">أحكام ورش عن الأزرق</Link></li>
                 <li><Link href="/progress" className="transition hover:text-[#E3C579]">لوحة التقدم والمراجعة</Link></li>
               </ul>
             </div>
